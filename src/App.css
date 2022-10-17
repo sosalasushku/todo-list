@@ -1,38 +1,104 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  background-color: lightblue;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.form {
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 2rem;
+  padding: 3rem 0 2rem;
+}
+
+.header {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  color: rgb(54, 21, 116);
+}
+
+.input {
+  display: flex;
+  align-items: flex-end;
+  gap: 1em;
+}
+
+.select {
+  width: 100%;
+} 
+
+.todolist {
+  margin: 2em 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.todo {
+  padding: .5rem .5rem .5rem 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1em;
+  background-color: #fff;
+  overflow-wrap: break-word; 
+  /* word-break: break-all;
+  word-wrap: normal;
+  hyphens: manual; */
+}
+
+.completed {
+  color: rgb(148, 148, 148) !important;
+  text-decoration: line-through;
+}
+
+.todo-content {
+  align-self: center;
+  max-width: 75%;
+}
+
+.btn-group {
+  display: flex;
+  gap: .5em;
+}
+
+.todo-btn {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 240px;
+  color: #000;
+  background-color: rgba(255, 255, 255, 0);
 }
 
-.App-link {
-  color: #61dafb;
+.complete:hover {
+  background-color: rgb(157, 214, 0);
+  color: #fff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.delete:hover {
+  background-color: rgb(255, 78, 34);
+  color: #fff;
 }

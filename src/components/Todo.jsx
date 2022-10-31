@@ -4,19 +4,19 @@ import DoneIcon from '@mui/icons-material/Done'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Paper from '@mui/material/Paper'
 
-const Todo = ({ todo, todos, setTodos }) => {
+import { useDispatch } from 'react-redux'
+import { deleteTodo, completeTodo } from '../redux/todoSlice'
+
+const Todo = ({ todo }) => {
+
+    const dispatch = useDispatch()
 
     const handleComplete = () => {
-        setTodos(todos.map(el => {
-            if (el.id === todo.id) {
-                el.isCompleted = !el.isCompleted
-            }
-            return el
-        }))
+        dispatch(completeTodo(todo.id))
     }
 
     const handleDelete = () => {
-        setTodos(todos.filter(el => el.id !== todo.id))
+        dispatch(deleteTodo(todo.id))
     }
 
     return (

@@ -6,33 +6,21 @@ import TodoList from './components/TodoList'
 
 import Container from '@mui/material/Container'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { setTodos, filterTodos } from './redux/todoSlice'
+
+
 function App() {
 
-  const [newTodo, setNewTodo] = useState('')
-  const [todos, setTodos] = useState([])
-  const [filter, setFilter] = useState('all')
-  const [filteredTodos, setFilteredTodos] = useState([])
+  const dispatch = useDispatch()
+  const filter = useSelector(state => state.filterReducer.filter)
+  const todos = useSelector(state => state.todoReducer.todos)
 
-  const filterTodos = () => {
-    switch (filter) {
-      case 'uncompleted':
-        setFilteredTodos(todos.filter(todo => !todo.isCompleted))
-        break
-      case 'completed':
-        setFilteredTodos(todos.filter(todo => todo.isCompleted))
-        break
-      default:
-        setFilteredTodos(todos)
-    }
-  }
+  dispatch(filterTodos(filter))
 
   const getFromLocalStorage = () => {
     if (localStorage.getItem('todos')) {
-      setTodos(JSON.parse(localStorage.getItem('todos')))
-      console.log(todos)
-    } else {
-      // setTodos(JSON.parse([]))
-      console.log(todos)
+      dispatch(setTodos(JSON.parse(localStorage.getItem('todos'))))
     }
   }
 
@@ -49,28 +37,14 @@ function App() {
   }, [todos])
 
   useEffect(() => {
-    filterTodos()
+    dispatch(filterTodos(filter))
   }, [filter, todos])
 
   return (
-    // <div className="app">
     <>
-      <Form
-        newTodo={newTodo}
-        setNewTodo={setNewTodo}
-        todos={todos}
-        setTodos={setTodos}
-        filter={filter}
-        setFilter={setFilter}
-      />
-      <TodoList
-        todos={todos}
-        setTodos={setTodos}
-        filteredTodos={filteredTodos}
-      />
+      <Form />
+      <TodoList />
     </>
-
-    // </div>
   );
 }
 

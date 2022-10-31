@@ -1,8 +1,12 @@
 import Todo from './Todo'
 import { Container } from '@mui/material'
-import { v4 as uuidv4 } from 'uuid'
 
-const TodoList = ({ todos, setTodos, filteredTodos }) => {
+import { useSelector } from 'react-redux'
+
+const TodoList = () => {
+
+    const filteredTodos = useSelector(state => state.todoReducer.filteredTodos)
+
     return (
         <Container maxWidth="sm">
             <div className='todolist'>
@@ -10,15 +14,12 @@ const TodoList = ({ todos, setTodos, filteredTodos }) => {
                     filteredTodos.map(todo => (
                         <Todo
                             todo={todo}
-                            todos={todos}
-                            setTodos={setTodos}
-                            key={uuidv4()}
+                            key={todo.id}
                         />
                     ))
                 }
             </div>
         </Container>
-
     )
 }
 

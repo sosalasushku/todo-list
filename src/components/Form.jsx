@@ -1,16 +1,22 @@
 import React from 'react'
 
-import { v4 as uuidv4 } from 'uuid'
-
 import { Container, FormControl, InputLabel, Select, TextField, MenuItem } from '@mui/material'
 
 import IconButton from '@mui/material/IconButton'
 import AddIcon from '@mui/icons-material/Add'
 
-const Form = ({ newTodo, setNewTodo, todos, setTodos, filter, setFilter }) => {
+import { useDispatch, useSelector } from 'react-redux'
+import { addTodo, setNewTodo } from '../redux/todoSlice'
+import { changeFilter } from '../redux/filterSlice'
+
+const Form = () => {
+
+    const dispatch = useDispatch()
+    const newTodo = useSelector(state => state.todoReducer.newTodo)
+    const filter = useSelector(state => state.filterReducer.filter)
 
     const handleInput = (e) => {
-        setNewTodo(e.target.value)
+        dispatch(setNewTodo(e.target.value))
     }
 
     const handleEnter = (e) => {
@@ -19,19 +25,14 @@ const Form = ({ newTodo, setNewTodo, todos, setTodos, filter, setFilter }) => {
 
     const handleAdd = (e) => {
         e.preventDefault()
-        const myTodo = {
-            content: newTodo,
-            id: uuidv4(),
-            isCompleted: false
-        }
-
-        setTodos([...todos, myTodo])
-        setNewTodo('')
+        dispatch(addTodo())
     }
 
     const handleFilter = (e) => {
-        setFilter(e.target.value);
-    };
+        const filt = e.target.value
+        dispatch(changeFilter(filt))
+        console.log('Filter from select: ', e.target.value)
+    }
 
     return (
         <div className='form'>
@@ -64,7 +65,6 @@ const Form = ({ newTodo, setNewTodo, todos, setTodos, filter, setFilter }) => {
                             value={filter}
                             label="Показать"
                             onChange={handleFilter}
-
                         >
                             <MenuItem value='all'>Все</MenuItem>
                             <MenuItem value='uncompleted'>Незавершённые</MenuItem>

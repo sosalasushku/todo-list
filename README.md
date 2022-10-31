@@ -3,4 +3,6 @@
 - JavaScript
 - React, React Hooks, React Router
 - Redux, Redux Toolkit
-- HTML, CSS
+- HTML
+- CSS
+- Material UI
